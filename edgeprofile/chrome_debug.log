@@ -1,0 +1,22 @@
+[21068:38748:1105/003216.097:WARNING:chrome_main_delegate.cc(846)] This is Chrome version 130.0.2849.68 (not a warning)
+[21068:38748:1105/003216.214:WARNING:activity_log_policy.cc(68)] Scheduling init
+[21068:38748:1105/003216.214:WARNING:activity_log_policy.cc(68)] Scheduling init
+[10600:13176:1105/003216.577:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+[2428:26736:1105/003216.815:INFO:cpu_info.cc(53)] Available number of cores: 24
+[35140:37220:1105/003216.889:INFO:cpu_info.cc(53)] Available number of cores: 24
+[21068:38748:1105/003217.225:INFO:CONSOLE(0)] "[DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://www.chromium.org/developers/design-documents/create-amazing-password-forms) %o", source: http://syspxxt.ahstu.edu.cn/aqks/Index.aspx (0)
+[21068:38748:1105/003217.238:INFO:CONSOLE(2)] "jQuery.Deferred exception: 非数字 is not defined ReferenceError: 非数字 is not defined
+    at HTMLDocument.<anonymous> (http://syspxxt.ahstu.edu.cn/aqks/Index.aspx:513:75)
+    at l (http://syspxxt.ahstu.edu.cn/aqks/Charts/highchart/jquery-3.3.1.min.js:2:29375)
+    at c (http://syspxxt.ahstu.edu.cn/aqks/Charts/highchart/jquery-3.3.1.min.js:2:29677) undefined", source: http://syspxxt.ahstu.edu.cn/aqks/Charts/highchart/jquery-3.3.1.min.js (2)
+[21068:38748:1105/003217.238:INFO:CONSOLE(2)] "Uncaught ReferenceError: 非数字 is not defined", source: http://syspxxt.ahstu.edu.cn/aqks/Charts/highchart/jquery-3.3.1.min.js (2)
+[38872:11024:1105/003217.645:INFO:cpu_info.cc(53)] Available number of cores: 24
+[21068:38748:1105/003218.828:WARNING:underside_helper.cc(1557)] If test does not need FrontLoad, this may be expected. SetFrontLoadDecision: 11
+[21068:38748:1105/003218.829:WARNING:wtm_image_web_contents_helper.cc(794)] Favicon request has been preempted. Skipping.  old request_start_time=2024-11-04 16:32:16.365951 UTC, pending_favicon_request_start_time_=2024-11-04 16:32:17.048149 UTC
+[6584:37324:1105/003219.140:INFO:extractor_impl.cc(983)] ExtractorImpl::SetIsPendingEEConfig : 1
+[21068:38748:1105/003243.865:INFO:CONSOLE(2)] "jQuery.Deferred exception: 非数字 is not defined ReferenceError: 非数字 is not defined
+    at HTMLDocument.<anonymous> (http://syspxxt.ahstu.edu.cn/aqks/Index.aspx:503:75)
+    at l (http://syspxxt.ahstu.edu.cn/aqks/Charts/highchart/jquery-3.3.1.min.js:2:29375)
+    at c (http://syspxxt.ahstu.edu.cn/aqks/Charts/highchart/jquery-3.3.1.min.js:2:29677) undefined", source: http://syspxxt.ahstu.edu.cn/aqks/Charts/highchart/jquery-3.3.1.min.js (2)
+[21068:38748:1105/003243.865:INFO:CONSOLE(2)] "Uncaught ReferenceError: 非数字 is not defined", source: http://syspxxt.ahstu.edu.cn/aqks/Charts/highchart/jquery-3.3.1.min.js (2)
+[21068:38748:1105/003317.962:WARNING:cloud_config_service.cc(211)] No subscription found for operation_config. Skip fetching it. If you are interested for this change, please subscribe beforehand.

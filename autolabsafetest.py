@@ -1,0 +1,221 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
+from bs4 import BeautifulSoup
+import json
+from selenium.webdriver.edge.options import Options
+from difflib import SequenceMatcher
+
+
+# 读取 questions.json 文件
+def load_questions():
+    with open('questions.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+# 通过题目内容进行模糊匹配
+def find_best_match(question_text, questions_data):
+    best_match = None
+    highest_ratio = 0.0
+    for question in questions_data:
+        question_content = question['question']
+        match_ratio = SequenceMatcher(None, question_text, question_content).ratio()
+        if match_ratio > highest_ratio:
+            highest_ratio = match_ratio
+            best_match = question
+    return best_match if highest_ratio > 0.8 else None  # 设定匹配的最低阈值为 0.8
+
+
+# 加载题目数据
+questions_data = load_questions()
+
+# 创建 Edge 选项
+options = Options()
+# 禁用自动 HTTPS
+options.add_argument("--disable-features=AutomaticHttps")
+options.add_argument(r"user-data-dir=D:\edgeprofile")
+
+# 启动Edge浏览器
+driver = webdriver.Edge(options=options)
+
+# 打开网站
+driver.get("http://syspxxt.ahstu.edu.cn/aqks/Index.aspx")
+
+# 等待页面加载
+time.sleep(2)
+
+# 输入账号和密码（账号和密码相同）
+username_input = driver.find_element(By.ID, "txtUserAccount")
+username_input.send_keys(str(input('输入你的账号:')))  # 账号和密码均为 2707240106
+
+password_input = driver.find_element(By.ID, "txtPassword")
+password_input.send_keys(str(input('输入你的密码:')))  # 账号和密码均为 2707240106
+
+# 手动输入验证码
+captcha_input = driver.find_element(By.ID, "txtIdentifyingCode")
+captcha_img = driver.find_element(By.ID, "imgIdentifyingCode").get_attribute("src")
+print(f"请手动输入验证码: {captcha_img}")
+captcha_code = input("请输入验证码: ")
+captcha_input.send_keys(captcha_code)
+
+# 点击登录按钮
+login_button = driver.find_element(By.ID, "btnLogin")
+login_button.click()
+
+# 等待登录完成
+time.sleep(3)
+
+# 查找“进入系统”按钮并点击
+enter_system_button = driver.find_element(By.XPATH, "//a[contains(text(), '进入系统')]")
+enter_system_button.click()
+
+# 等待页面加载
+time.sleep(3)
+
+# 提供用户输入 1=考试 2=练习
+choice = input("请输入 1 选择考试，输入 2 选择练习：")
+
+if choice == "1":
+    driver.get("http://syspxxt.ahstu.edu.cn/aqks/Student/TestList.aspx")
+    print("跳转到考试页面")
+elif choice == "2":
+    driver.get("http://syspxxt.ahstu.edu.cn/aqks/Student/PracticeList.aspx")
+    print("跳转到练习页面")
+else:
+    print("无效输入，请输入 1 或 2")
+    driver.quit()
+
+# 等待页面加载
+time.sleep(2)
+
+# 用户确认已进入考试/练习页面
+input("请确认已进入考试/练习页面后按 Enter 键继续...")
+
+# 等待页面加载 iframe
+WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "iframe[id^='layui-layer-iframe']"))
+)
+
+# 提取 iframe 的 src 属性
+iframe = driver.find_element(By.CSS_SELECTOR, "iframe[id^='layui-layer-iframe']")
+iframe_src = iframe.get_attribute("src")
+print(f"考试/练习页面的链接: {iframe_src}")
+
+# 打开实际的考试/练习页面
+driver.get(iframe_src)
+
+# 获取页面源代码
+html = driver.page_source
+
+# 解析HTML
+soup = BeautifulSoup(html, 'html.parser')
+
+# 创建 ABCD 到 1234 的映射
+option_map = {
+    'A': '1',
+    'B': '2',
+    'C': '3',
+    'D': '4',
+    'E': '5',
+    'F': '6',
+}
+
+# 创建 正确/错误 到 T/F 的映射
+tf_map = {
+    '正确': 'T',
+    '错误': 'F'
+}
+
+
+# 自动答题实现
+def auto_answer():
+    # 查找每一道题目及其选项
+    question_rows = soup.find_all('tr', id=True)
+
+    for i, question_row in enumerate(question_rows, start=1):
+        # 提取题目 ID
+        question_id = question_row['id'].replace("tr", "")
+
+        # 查找题干
+        question_text_element = question_row.find('h4')
+        question_text = question_text_element.text.strip() if question_text_element else ""
+
+        # 查找选项
+        options_elements = question_row.find_all('p')
+        options_text = [opt.text.strip() for opt in options_elements]
+
+        cleaned_options = []
+
+        for option in options_text:
+            # 去掉前后空白字符
+            cleaned_option = option.strip()
+            # 替换特殊字符
+            cleaned_option = cleaned_option.replace('\xa0', '').replace('\n', '')
+            if "正确" in cleaned_option or "错误" in cleaned_option:
+                cleaned_options = ['正确', '错误']
+                break  # 找到判断题后退出循环
+
+            # 如果选项不为空且去掉特殊字符后仍然有内容，则加入 cleaned_options
+            if cleaned_option:
+                # 可以根据需求进一步分割选项（如果选项包含多个值）
+                cleaned_options.extend(cleaned_option.split())
+
+        # 如果 cleaned_options 不等于 判断题的选项，则删除最后一项
+        if cleaned_options != ['正确', '错误'] and cleaned_options:
+            cleaned_options.pop()  # 删除最后一项（如 'ABCD'）
+
+        # 将选项连接为一个字符串，使用空格分隔
+        result = ' '.join(cleaned_options)
+
+
+        print(f"题号 {i}: {question_text}")
+        print(f"选项: {result}")
+
+        # 模糊匹配最优题目
+        best_match = find_best_match(question_text, questions_data)
+
+        if not best_match:
+            print(f"未找到匹配的题目，跳过...")
+            continue
+
+        print(f"匹配到的正确答案: {best_match['correct_answer']}")
+
+        # 根据题型自动作答
+        if i <= 20:  # 单选题
+            correct_answer = best_match['correct_answer'].strip()
+            converted_choice = option_map.get(correct_answer, None)
+            if converted_choice:
+                radio_button = driver.find_element(By.ID, f"rdb{question_id}{converted_choice}")
+                radio_button.click()
+            else:
+                print(f"未找到单选答案的映射: {correct_answer}")
+
+        elif 21 <= i <= 30:  # 多选题
+            correct_answers = best_match['correct_answer'].split(',')
+            for answer in correct_answers:
+                answer = answer.strip()
+                converted_choice = option_map.get(answer, None)
+                if converted_choice:
+                    checkbox = driver.find_element(By.ID, f"cbl{question_id}{converted_choice}")
+                    checkbox.click()
+                else:
+                    print(f"未找到多选答案的映射: {answer}")
+
+        elif 31 <= i <= 50:  # 判断题
+            correct_answer = best_match['correct_answer'].strip()
+            converted_choice = tf_map.get(correct_answer, None)
+            if converted_choice:
+                radio_button = driver.find_element(By.ID, f"rdb{question_id}{converted_choice}")
+                radio_button.click()
+            else:
+                print(f"未找到判断题答案的映射: {correct_answer}")
+
+
+# 开始自动答题
+auto_answer()
+
+# 保持浏览器打开，等待用户输入
+input("手动交卷后按 Enter 键退出并关闭浏览器...")
+driver.quit()

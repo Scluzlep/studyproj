@@ -1,0 +1,230 @@
+﻿body
+{
+    font-family: "Microsoft YaHei UI" , "Microsoft YaHei" , DengXian, SimSun, "Segoe UI" , Tahoma, Helvetica, sans-serif;
+}
+/*按钮样式*/
+.btnCss
+{
+    font-family: "Tahoma" , "微软雅黑";
+    font-size: 9pt;
+    color: black;
+    border: 0px #93bee2 solid;
+    border-bottom: #93bee2 0px solid;
+    border-left: #93bee2 0px solid;
+    border-right: #93bee2 0px solid;
+    border-top: #93bee2 0px solid;
+    background-color: #00BCF2; /* background-image: url('../../images/button.jpg');*/
+    cursor: pointer;
+    font-style: normal;
+    width: 76px;
+    height: 25px;
+    margin: 3px 10px 3px 10px;
+}
+input[type='submit']
+{
+    font-family: "Tahoma" , "微软雅黑";
+    font-size: 12pt;
+    color: White;
+    letter-spacing: 2px;
+    border: 0px #93bee2 solid;
+    border: #93bee2 0px solid;
+    background-color: #00BCF2; /* background-image: url('../../images/button.jpg');*/
+    cursor: pointer;
+    font-style: normal;
+    width: 76px;
+    height: 22px;
+    margin: 3px 10px 3px 10px;
+}
+input[type='text']
+{
+    border-style: Groove;
+    height: 20px;
+    width: 200px;
+}
+input[type='password']
+{
+    border-style: Groove;
+    height: 25px;
+    width: 200px;
+}
+textarea
+{
+    border-style: Groove;
+}
+.divtitle
+{
+    font-family: "Tahoma" , "微软雅黑";
+    color: #0099FF;
+    width: 100%;
+    padding-left: 20px;
+    margin-left: 0px;
+    border-bottom: solid 1px #7ac1ff;
+    height: 30px;
+    background-color: #eaf2f8;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+    overflow: hidden;
+}
+
+.title
+{
+    font-family: "微软雅黑";
+    color: White;
+    width: 98%;
+    padding-left: 20px;
+    margin-left: 0px;
+    height: 30px;
+    background-color: #0099FF;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+    overflow: hidden;
+}
+.TextFont
+{
+    font-family: "微软雅黑";
+    font-size: 14px;
+    color: #0099FF;
+    height: 30px;
+}
+
+.TextFontBig
+{
+    font-family: "微软雅黑";
+    font-size: 30px;
+    color: #0099FF;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.TreeCSS
+{
+    width: 118px;
+    height: auto;
+    font-size: 14px;
+    font-weight: bold;
+    color: #f87100;
+}
+
+.left
+{
+    width: 118px;
+    float: left;
+    height: 710px;
+    border: #C1DAD7 1px solid;
+    background-color: #fff174;
+    padding: 10px;
+    line-height: 25px;
+}
+.right
+{
+    width: 896px;
+    height: 710px;
+    padding-top: 10px;
+    float: left;
+}
+
+/*分页样式*/
+
+/*网易风格*/
+.anpager .cpb
+{
+    background: #1F3A87 none repeat scroll 0 0;
+    border: 1px solid #CCCCCC;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 5px 4px 0 0;
+    padding: 4px 5px 0;
+}
+.anpager a
+{
+    background: #FFFFFF none repeat scroll 0 0;
+    border: 1px solid #CCCCCC;
+    color: #1F3A87;
+    margin: 5px 4px 0 0;
+    padding: 4px 5px 0;
+    text-decoration: none;
+}
+.anpager a:hover
+{
+    background: #1F3A87 none repeat scroll 0 0;
+    border: 1px solid #1F3A87;
+    color: #FFFFFF;
+}
+
+/*拍拍网风格*/
+.paginator
+{
+    font: 11px Arial, Helvetica, sans-serif;
+    padding: 10px 20px 10px 0;
+    margin: 0px;
+}
+.paginator a
+{
+    padding: 1px 6px;
+    border: solid 1px #ddd;
+    background: #fff;
+    text-decoration: none;
+    margin-right: 2px;
+}
+.paginator a:visited
+{
+    padding: 1px 6px;
+    border: solid 1px #ddd;
+    background: #fff;
+    text-decoration: none;
+}
+.paginator .cpb
+{
+    padding: 1px 6px;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+}
+.paginator a:hover
+{
+    color: #fff;
+    background: #ffa501;
+    border-color: #ffa501;
+    text-decoration: none;
+}
+
+/*迅雷风格*/
+.pages
+{
+    color: #999;
+}
+.pages a, .pages .cpb
+{
+    text-decoration: none;
+    float: left;
+    padding: 0 5px;
+    border: 1px solid #ddd;
+    background: #ffff;
+    margin: 0 2px;
+    font-size: 11px;
+    color: #000;
+}
+.pages a:hover
+{
+    background-color: #E61636;
+    color: #fff;
+    border: 1px solid #E61636;
+    text-decoration: none;
+}
+.pages .cpb
+{
+    font-weight: bold;
+    color: #fff;
+    background: #E61636;
+    border: 1px solid #E61636;
+}
+.spanColor-Read
+{
+    color: Red;
+}
+.TrTag
+{
+    background-color:"#FFDAB9";
+}
