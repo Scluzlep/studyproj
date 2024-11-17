@@ -40,9 +40,12 @@ def try_login(account, encrypted_password):
 
         # 根据响应内容判断登录结果
         if "userid error3" in response_text or "userid error2" in response_text:
-            print(f"账号 {account}：尝试失败，继续尝试...")
-            return "retry"
+            print(f"账号 {account}：密码错误")
+            return "skip"
         elif "userid error1" in response_text:
+            print(f"账号 {account}：无效账号，跳过...")
+            return "skip"
+        elif "费用超支" in response_text:
             print(f"账号 {account}：无效账号，跳过...")
             return "skip"
         else:
