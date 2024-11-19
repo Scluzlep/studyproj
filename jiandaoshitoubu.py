@@ -22,3 +22,8 @@ elif (player_choice == '剪刀' and computer_choice == '布') \
     print(f"电脑出的是{computer_choice},你出的是{player_choice},恭喜你赢了")
 else:
     print(f"电脑出的是{computer_choice},你出的是{player_choice},很遗憾，你输了")
+
+play_again = input("是否继续游戏？（是/否）")
+if play_again!= '是':
+    print("再见！")
+    break
