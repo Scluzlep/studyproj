@@ -1,4 +1,4 @@
-with open('购物单.txt','r',encoding='utf-8') as f:
+with open('购物单.txt', 'r', encoding='utf-8') as f:
     s1 = f.readlines()
     total_price = 0
     for i in s1:

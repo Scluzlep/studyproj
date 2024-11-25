@@ -14,4 +14,3 @@ with open('egstory.txt','r',encoding='utf-8-sig') as f:
         if L.count(k) > 5 and k not in s3:
             s3.append(k)
 print(s3)
-
