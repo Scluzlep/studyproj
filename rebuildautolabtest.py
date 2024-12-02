@@ -10,7 +10,6 @@ from difflib import SequenceMatcher
 import os
 import shutil
 
-
 # 创建 ABCD 到 1234 的映射
 OPTION_MAP = {'A': '1', 'B': '2', 'C': '3', 'D': '4', 'E': '5', 'F': '6'}
 
@@ -158,6 +157,7 @@ def auto_rmprofile():
             print(f"已删除题库文件: {questions_file}")
     except Exception as e:
         print(f"删除文件时发生错误: {e}")
+
 
 # 自动答题实现
 def auto_answer():
