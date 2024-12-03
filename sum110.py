@@ -4,4 +4,5 @@ def sum110(n):
     else:
         return n + sum110(n - 1)
 
+
 print(sum110(10))
