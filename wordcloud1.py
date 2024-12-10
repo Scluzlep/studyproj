@@ -13,6 +13,6 @@ for i in a:
         else:
             word_counts[i] = 1
 
-wc = WordCloud(width=1920, height=1080, background_color='white', mode='RGB', font_path=fonts)
+wc = WordCloud(width=2560, height=1440, background_color='white', mode='RGB', font_path=fonts)
 wc.generate_from_frequencies(word_counts)
 wc.to_file('wordcloud.png')
