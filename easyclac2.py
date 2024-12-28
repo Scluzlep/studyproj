@@ -7,10 +7,10 @@ class App:
         self.root.geometry("500x300")
         self.show = Label(self.root, font=('宋体', 24), width=23)
         self.show.grid(row=0, column=0, columnspan=5)
-        self.initWidgets()
+        self.init_widgets()
         self.root.mainloop()
 
-    def initWidgets(self):
+    def init_widgets(self):
         self.show['text'] = ''
         names = ("+", "1", "2", "3", "C", "-", "4", "5", "6", "**", "*", "7", "8", "9", "//", "/", ".", "0", "%", "=")
         for i in range(len(names)):
